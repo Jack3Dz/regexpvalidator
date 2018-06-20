@@ -1,24 +1,52 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'react-bootstrap'
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 
 class App extends Component {
-  
-  handleClick = () => {
-    console.log('teste');
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      exp: ""
+    };
+  }
+
+  validateForm() {
+    return this.state.exp.length > 0;
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+  }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-
-          <div class="App-center">
-            <Button type="button" class="btn btn-primary" onClick={this.handleClick}>Validar</Button>
-          </div>
-        </header>
+      <div className="Exp">
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="exp" bsSize="large">
+            <ControlLabel>Expressão a ser validada:</ControlLabel>
+            <FormControl
+              autoFocus
+              type="exp"
+              value={this.state.exp}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <Button
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+          >
+            Validar
+          </Button>
+        </form>
       </div>
     );
   }
