@@ -14,9 +14,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          
+
           <div class="App-center">
-            <Button type="button" class="btn btn-primary">Validar</Button>
+            <Button type="button" class="btn btn-primary" onClick={this.handleClick}>Validar</Button>
           </div>
         </header>
       </div>
