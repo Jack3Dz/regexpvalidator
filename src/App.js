@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Button } from 'react-bootstrap'
 
 class App extends Component {
+  
   handleClick = () => {
     console.log('teste');
   };
@@ -12,13 +14,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          
+          <div class="App-center">
+            <Button type="button" class="btn btn-primary">Validar</Button>
+          </div>
         </header>
-        <button onClick={this.handleClick}>
-          Validar
-        </button>
       </div>
-      
     );
   }
 }
