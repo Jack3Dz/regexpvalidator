@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
 import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 
@@ -7,7 +8,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      exp: ""
+      exp: "",
+      formErrors: {exp: ''},
+      expValid: false
     };
   }
 
@@ -33,27 +36,42 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Exp">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="exp" bsSize="large">
-            <ControlLabel>Expressão a ser validada:</ControlLabel>
-            <FormControl
-              autoFocus
-              type="exp"
-              value={this.state.exp}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Validar
-          </Button>
-        </form>
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Validador de Regex</h2>
+          <br />
+        </div>
+
+        <div className="Exp">
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="exp" bsSize="large">
+              <ControlLabel>Expressão a ser validada</ControlLabel>
+              <FormControl
+                id="exp"
+                type="exp"
+                autoFocus
+                value={this.state.exp}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <Button
+              block
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Validar
+            </Button>
+          </form>
+        </div>
+
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
       </div>
+      
+      
     );
   }
 }
