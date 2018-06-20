@@ -19,6 +19,11 @@ class App extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
+
+    const re = /^[0-9\b]+$/;
+    if (event.target.value === '' || re.test(event.target.value)) {
+       this.setState({value: event.target.value})
+    }
   }
 
   handleSubmit = event => {
