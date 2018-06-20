@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import Form from './Form.js';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class App extends Component {
 
     this.state = {
       exp: "",
-      formErrors: {exp: ''},
       expValid: false
     };
   }
@@ -65,10 +65,7 @@ class App extends Component {
             </Button>
           </form>
         </div>
-
-        <div className="panel panel-default">
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
+        <Form/>
       </div>
       
       
