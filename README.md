@@ -1,5 +1,8 @@
 <h1>RegExp Validator</h1>
 
+<h3>Install React</h3>
+<code>npm install -g create-react-app</code>
+
 <h3>Git repo</h3>
 <code>git clone https://github.com/Jack3Dz/regexpvalidator/</code>
 
