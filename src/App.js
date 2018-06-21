@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       exp: '',
+      lstCondition: '',
       formErrors: {exp: ''},
       expValid: false,
       formValid: false
@@ -81,11 +82,25 @@ class App extends Component {
           <h2>Validador de Regex</h2>
           <br />
         </div>
-
         <div className="Exp">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="exp" bsSize="large">
+            <FormGroup controlId="lstCondition">
               <ControlLabel>Expressão a ser validada</ControlLabel>
+              <FormControl componentClass="select" placeholder="select" bsSize="large">
+                <option value="1">Cadeias que começam com 01 e terminam com 10.</option>
+                    {/*        \b01\S*10\b              */}
+                <option value="2">Cadeias com qualquer cadeia de entrada.</option>
+                    {/*        \S*[0-1]                 */}
+                <option value="3">Cadeias com pelo menos duas ocorrências do padrão 101</option>
+                    {/*       (\S*101){2,}.*            */}
+                <option value="4">Todas Cadeias que contenham exatamente quatro 1s.</option>
+                    {/*       (\S*1){4,}.*              */}
+                <option value="5">Contenham as cadeias 0110 e 1001.</option>
+                    {/*       (?=.*1001)(?=.*0110).*    */}
+              </FormControl>
+            </FormGroup>
+            <FormGroup controlId="exp" bsSize="large">
+              <ControlLabel>Cadeia</ControlLabel>
               <FormControl
                 id="exp"
                 name="exp"
