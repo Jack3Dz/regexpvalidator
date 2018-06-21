@@ -1,42 +1,35 @@
 import React, { Component } from 'react';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import './Form.css';class Form extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          email: '',
-          password: '',
-          formErrors: {email: '', password: ''},
-          emailValid: false,
-          passwordValid: false,
+          exp: '',
+          formErrors: {exp: ''},
+          expValid: false,
           formValid: false
         }
     }
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
-        let emailValid = this.state.emailValid;
-        let passwordValid = this.state.passwordValid;
+        let expValid = this.state.expValid;
       
         switch(fieldName) {
-          case 'email':
-            emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-            fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-            break;
-          case 'password':
-            passwordValid = value.length >= 6;
-            fieldValidationErrors.password = passwordValid ? '': ' is too short';
+          case 'exp':
+            expValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+            fieldValidationErrors.exp = expValid ? '' : ' is invalid';
             break;
           default:
             break;
         }
         this.setState({formErrors: fieldValidationErrors,
-                        emailValid: emailValid,
-                        passwordValid: passwordValid
+                        expValid: expValid
                       }, this.validateForm);
       }
       
     validateForm() {
-        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+        this.setState({formValid: this.state.expValid});
     }
 
     errorClass(error) {
@@ -53,31 +46,21 @@ import './Form.css';class Form extends Component {
     render () {
         return (
             <form className="demoForm">
-                <h2>Sign up</h2>
                 <div className={`form-group
-                    ${this.errorClass(this.state.formErrors.email)}`}>
+                    ${this.errorClass(this.state.formErrors.exp)}`}>
 
-                    <label htmlFor="email">Email address</label>
-                    <input type="email" 
+                    <label htmlFor="exp">Expressão a ser validada</label>
+                    <input 
+                        type="text" 
                         className="form-control"
-                        name="email" 
-                        value={this.state.email}
+                        name="exp" 
+                        value={this.state.exp}
                         onChange={(event) => this.handleUserInput(event)}/>
                         
                 </div>
-                <div className={`form-group
-                    ${this.errorClass(this.state.formErrors.password)}`}>
-
-                    <label htmlFor="password">Password</label>
-                    <input type="password" 
-                        className="form-control"
-                        name="password" 
-                        value={this.state.password}
-                        onChange={(event) => this.handleUserInput(event)}/>
-                </div>
-                <button type="submit" className="btn btn-primary" 
-                    disabled={!this.state.formValid}>Sign up
-                </button>
+                <Button type="submit" bsSize="large"
+                    disabled={!this.state.formValid}>Validar
+                </Button>
             </form>
         )
     };
