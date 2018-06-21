@@ -1,11 +1,13 @@
-RegExp Validator
+<h1>RegExp Validator</h1>
 
-Git repo </br>
-<code>git clone https://github.com/Jack3Dz/regexpvalidator/</code> </br> </br> 
+<h3>Git repo</h3>
+<code>git clone https://github.com/Jack3Dz/regexpvalidator/</code>
 
-<code>cd regexpvalidator </code> </br> </br> 
+<h3>Acess folder</h3>
+<code>cd regexpvalidator </code> 
 
-Restore packages </br>
-<code>npm install</code> </br> </br>
-Start app </br>
-<code>npm start</code> </br> </br>
+<h3>Restore packages</h3> 
+<code>npm install</code>
+
+<h3>Start app</h3> 
+<code>npm start</code>
