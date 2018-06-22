@@ -4,24 +4,7 @@ import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import Dialog from 'react-bootstrap-dialog'
 
-
-class App extends Component {
-  // validateForm() {
-  //   return this.state.exp.length > 0;
-    
-  // }
-
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.id]: event.target.value
-  //   });
-
-  //   const re = /^[0-9\b]+$/;
-  //   if (event.target.value === '' || re.test(event.target.value)) {
-  //      this.setState({value: event.target.value})
-  //   }
-  // }
-  
+class App extends Component {  
   constructor(props) {
     super(props);
 
@@ -94,13 +77,15 @@ class App extends Component {
     const value = e.target.value;
     const lstValue = this.state.lstCondition;
     this.setState({[name]: value}, 
-                  () => { this.validateField(name, value, lstValue) });
+                  () => { this.validateField(name, value, lstValue) },
+                  () => { this.errorClass(this.state.formErrors.exp) });
   }
 
   handleUserSelect(e) {
     this.setState({exp: '',
                   lstCondition: e.target.value,
-                  formValid: false});
+                  formValid: false},
+                  () => { this.errorClass(this.state.formErrors.exp) });
   }
 
   handleUserClick(e) {
@@ -135,7 +120,9 @@ class App extends Component {
                     {/*       (?=.*1001)(?=.*0110).*    */}
               </FormControl>
             </FormGroup>
-            <FormGroup controlId="exp" bsSize="large">
+            <FormGroup controlId="exp" bsSize="large" 
+              className={`form-group
+              ${this.errorClass(this.state.formErrors.exp)}`}>
               <ControlLabel>Cadeia</ControlLabel>
               <FormControl
                 id="exp"
