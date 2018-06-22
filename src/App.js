@@ -74,6 +74,13 @@ class App extends Component {
                   () => { this.validateField(name, value) });
   }
 
+  handleUserSelect (e){
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},
+                  () => { this.validateField(name, value)});
+  }
+
   render() {
     return (
       <div className="App">

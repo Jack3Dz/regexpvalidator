@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Launch",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000/#/about",
+      "port": 9223,
+      "sourceMaps": true,
+      "diagnosticLogging": true,
+      "webRoot": "${workspaceRoot}",
+      "userDataDir": "${workspaceRoot}/out/chrome",
+      "runtimeExecutable": "G:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+    }
+  ]
+}
