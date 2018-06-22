@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import Dialog from 'react-bootstrap-dialog'
+
 
 class App extends Component {
   // validateForm() {
@@ -97,7 +99,12 @@ class App extends Component {
 
   handleUserSelect(e) {
     this.setState({exp: '',
-                    lstCondition: e.target.value});
+                  lstCondition: e.target.value,
+                  formValid: false});
+  }
+
+  handleUserClick(e) {
+    this.dialog.showAlert('Parabéns, essa é uma condição válida!');
   }
 
   render() {
@@ -143,10 +150,12 @@ class App extends Component {
               block
               bsSize="large"
               disabled={!this.state.formValid}
-              type="submit">
+              type="submit"
+              onClick={(event) => this.handleUserClick(event)}>
 
               Validar
             </Button>
+            <Dialog ref={(el) => { this.dialog = el }} />
           </form>
         </div>
       </div>
