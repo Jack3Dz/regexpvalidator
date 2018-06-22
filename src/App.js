@@ -4,18 +4,6 @@ import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      exp: '',
-      lstCondition: '',
-      formErrors: {exp: ''},
-      expValid: false,
-      formValid: false
-    };
-  }
-
   // validateForm() {
   //   return this.state.exp.length > 0;
     
@@ -31,12 +19,24 @@ class App extends Component {
   //      this.setState({value: event.target.value})
   //   }
   // }
+  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      exp: '',
+      lstCondition: '1',
+      formErrors: {exp: ''},
+      expValid: false,
+      formValid: false
+    };
+  }
 
   handleSubmit = event => {
     event.preventDefault();
   }
 
-  validateField(fieldName, value) {
+  validateField(fieldName, value, lstValue) {
     let fieldValidationErrors = this.state.formErrors;
     let expValid = this.state.expValid;
     let exp = this.state.exp;
@@ -44,12 +44,32 @@ class App extends Component {
     regex= /[^0-1]+/g;
     exp = value.replace(regex, '')
   
-    switch(fieldName) {
-      case 'exp':
-        expValid = exp.match(/^[0-1\b]+$/);
+    switch(lstValue) {
+      case '1':
+        expValid = exp.match(/\b01\S*10\b/);
         fieldValidationErrors.exp = expValid ? '' : ' is invalid';
         break;
 
+      case '2':
+        expValid = exp.match(/\S*[0-1]/);
+        fieldValidationErrors.exp = expValid ? '' : ' is invalid';
+        break;
+
+      case '3':
+        expValid = exp.match(/(\S*101){2,}.*/);
+        fieldValidationErrors.exp = expValid ? '' : ' is invalid';
+        break;
+
+      case '4':
+        expValid = exp.match(/(\S*1){4,}.*/);
+        fieldValidationErrors.exp = expValid ? '' : ' is invalid';
+        break;
+
+      case '5':
+        expValid = exp.match(/(?=.*1001)(?=.*0110).*/);
+        fieldValidationErrors.exp = expValid ? '' : ' is invalid';
+        break;
+        
       default:
         break;
     }
@@ -70,15 +90,14 @@ class App extends Component {
   handleUserInput (e) {
     const name = e.target.name;
     const value = e.target.value;
+    const lstValue = this.state.lstCondition;
     this.setState({[name]: value}, 
-                  () => { this.validateField(name, value) });
+                  () => { this.validateField(name, value, lstValue) });
   }
 
-  handleUserSelect (e){
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({[name]: value},
-                  () => { this.validateField(name, value)});
+  handleUserSelect(e) {
+    this.setState({exp: '',
+                    lstCondition: e.target.value});
   }
 
   render() {
@@ -93,7 +112,10 @@ class App extends Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="lstCondition">
               <ControlLabel>Expressão a ser validada</ControlLabel>
-              <FormControl componentClass="select" placeholder="select" bsSize="large">
+              <FormControl 
+                componentClass="select" placeholder="select" bsSize="large" 
+                onChange={(event) => this.handleUserSelect(event)} selected="1">
+
                 <option value="1">Cadeias que começam com 01 e terminam com 10.</option>
                     {/*        \b01\S*10\b              */}
                 <option value="2">Cadeias com qualquer cadeia de entrada.</option>
