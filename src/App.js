@@ -46,7 +46,7 @@ class App extends Component {
         break;
 
       case '4':
-        expValid = exp.match(/(\S*1){4,}.*/);
+        expValid = exp.match(/^(0*10*){4}$/);
         fieldValidationErrors.exp = expValid ? '' : ' is invalid';
         break;
 
@@ -115,7 +115,8 @@ class App extends Component {
                 <option value="3">Cadeias com pelo menos duas ocorrências do padrão 101</option>
                     {/*       (\S*101){2,}.*            */}
                 <option value="4">Todas Cadeias que contenham exatamente quatro 1s.</option>
-                    {/*       (\S*1){4,}.*              */}
+                    {/*       ^(0*10*){4}$              */}
+                    {/*       /^([^1]*1[^1]*){4}$/      */}
                 <option value="5">Contenham as cadeias 0110 e 1001.</option>
                     {/*       (?=.*1001)(?=.*0110).*    */}
               </FormControl>
